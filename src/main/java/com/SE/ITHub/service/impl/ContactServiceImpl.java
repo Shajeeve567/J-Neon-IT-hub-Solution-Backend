@@ -1,9 +1,5 @@
 package com.SE.ITHub.service.impl;
 
-import com.SE.ITHub.dto.ContactCreateRequest;
-import com.SE.ITHub.dto.ContactResponse;
-import com.SE.ITHub.exception.ContactNotFoundException;
-import com.SE.ITHub.mapper.ContactMapper;
 import com.SE.ITHub.model.Contact;
 import com.SE.ITHub.repository.ContactRepository;
 import com.SE.ITHub.service.ContactService;
@@ -15,11 +11,7 @@ public class ContactServiceImpl implements ContactService {
     @Autowired
     private ContactRepository contactRepository;
 
-    public Contact findById(Long id){
-        return contactRepository.findById(id).orElseThrow(()->new ContactNotFoundException("Contact not found "+id));
-    }
-
-    public ContactResponse addContactMessage(ContactCreateRequest contact){
-        return  ContactMapper.toResponse(contactRepository.save(ContactMapper.toEntity(contact)));
+    public Contact addContactMessage(Contact contact){
+        return  contactRepository.save(contact);
     }
 }

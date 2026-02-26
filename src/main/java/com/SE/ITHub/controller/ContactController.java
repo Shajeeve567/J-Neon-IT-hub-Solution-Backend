@@ -1,6 +1,6 @@
 package com.SE.ITHub.controller;
 
-import com.SE.ITHub.dto.ContactCreateRequest;
+import com.SE.ITHub.model.Contact;
 import com.SE.ITHub.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ public class ContactController {
     private ContactService contactService;
 
     @PostMapping("/post")
-    public ResponseEntity<?> postContact(@RequestBody ContactCreateRequest contact){
+    public ResponseEntity<?> postContact(@RequestBody Contact contact){
         return ResponseEntity.status(HttpStatus.OK).body(contactService.addContactMessage(contact));
     }
 }
