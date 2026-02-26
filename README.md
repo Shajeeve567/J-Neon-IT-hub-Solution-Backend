@@ -1,24 +1,24 @@
-# IT Agency Website – Backend
+# IT Agency Website – Frontend
 
-Scalable REST API powering the public website, Admin CMS, AI knowledge system, and analytics services.
+Modern public website + Admin CMS interface with AI-powered knowledge assistant.
 
 ---
 
 ## Overview
 
-This backend application provides all core business logic, authentication, data management, AI knowledge processing, and analytics aggregation for the agency platform.
+This frontend application powers the **public-facing website**, **admin dashboard (CMS)**, and **AI knowledge assistant interface** for the agency platform.
 
-It is responsible for:
+It is built to support:
 
-* Secure admin authentication (OAuth 2.0)
-* CMS content management
-* Contact inquiry handling
-* AI-powered PDF knowledge retrieval (RAG)
-* Media storage management
-* Analytics tracking & aggregation
+* Public website experience
+* AI assistant (PDF-based knowledge system)
+* Contact & inquiry flow
+* Admin authentication (OAuth 2.0)
+* Full content & media management (CMS)
+* Analytics dashboard
 
-This repository contains **only the backend implementation**.
-Frontend is handled separately.
+This repository contains **only the frontend implementation**.
+Backend services are handled separately.
 
 ---
 
@@ -26,112 +26,97 @@ Frontend is handled separately.
 
 ---
 
-## EPIC 1: Public Website Experience Support
+## EPIC 1: Public Website Experience (14 SP)
 
-### Backend Responsibilities
+### Implemented Features
 
-* Provide public APIs for:
+* Homepage UI
+* About page
+* Services listing page
+* Service details page
+* Portfolio listing
+* AI Assistant interface (chat UI)
+* AI responses restricted to indexed PDF knowledge base
 
-  * Services listing & details
-  * Portfolio listing & details
-  * Website page content & sections
-* Track page views
-* Track portfolio item views
+### Key Frontend Responsibilities
+
+* Dynamic rendering of services & portfolio
+* Chat interface for AI assistant
+* API integration for AI response streaming
+* Responsive UI across devices
 
 ---
 
-## EPIC 2: Contact & Inquiry Management
+## EPIC 2: Contact & Inquiry Management (7 SP)
 
 ### Features
 
-* Store contact form submissions
-* Validate input data
-* Provide admin endpoint to retrieve inquiries
+* Contact form (Name, Email, Message)
+* Form validation
+* API submission to backend
+* Admin view for inquiries (dashboard panel)
 
 ---
 
-## EPIC 3: Admin Authentication & Account Management
+## EPIC 3: Admin Authentication & Account Management (7 SP)
 
 ### Features
 
-* OAuth 2.0 integration
-* JWT token generation & validation
-* Role-based access control (RBAC)
-* Secure password storage (if local accounts supported)
-* Admin account lifecycle management
-
-### Security Responsibilities
-
-* Protect admin routes with middleware
-* Validate JWT tokens
-* Restrict access to authorized roles only
+* OAuth 2.0 login integration
+* Route protection (Private routes)
+* Admin dashboard access restriction
+* Admin account management UI
+* Create / deactivate / delete admin accounts
 
 ---
 
-## EPIC 4: Content & Media Management (CMS)
+## EPIC 4: Content & Media Management (CMS) (15 SP)
 
 ### Services Management
 
 * Create service
-* Update service
+* Edit service
 * Delete service
-* Attach media references
+* Attach images to services
 
 ### Pages Management
 
 * Create pages
-* Add / edit / reorder sections
+* Add sections
+* Edit sections
+* Reorder sections (drag-and-drop)
 * Delete sections
 
 ### Portfolio Management
 
-* CRUD operations for portfolio items
+* Create / edit / delete portfolio items
 
 ### Media Management
 
-* Upload image files
-* Store metadata in database
+* Upload images
 * Delete unused images
-* Prevent orphaned file storage
+* Media reuse across services/pages
 
 ---
 
-## EPIC 5: AI Knowledge System (Multimodal RAG with PDFs)
+## EPIC 5: AI Knowledge System (Multimodal RAG with PDFs) (5 SP)
 
 ### Features
 
-* Upload PDF documents
-* Extract text from PDFs
-* Chunk & embed document content
-* Store embeddings in vector database
-* Retrieve relevant chunks during user queries
-* Generate responses strictly from indexed documents
-
-### Backend Responsibilities
-
-* PDF parsing
-* Embedding generation
-* Vector storage
-* Retrieval logic
-* Prompt construction for AI model
-* Ensure responses are grounded (no hallucination)
+* Upload PDF interface
+* List uploaded PDFs
+* Delete PDFs
+* Display AI responses generated strictly from indexed documents
 
 ---
 
-## EPIC 6: Analytics & System Insights
+## EPIC 6: Analytics & System Insights (3 SP)
 
 ### Features
 
-* Track page visits
-* Track portfolio views
-* Aggregate metrics daily
-* Provide dashboard analytics endpoints
-
-### Backend Responsibilities
-
-* Event logging
-* Scheduled aggregation (daily batch job)
-* Optimized analytics queries
+* Total page views
+* Portfolio item view count
+* Daily aggregated analytics display
 
 ---
 
@@ -139,80 +124,23 @@ Frontend is handled separately.
 
 ### Core
 
-* Spring Boot
-* RESTful API architecture
+* React (Functional Components + Hooks)
+* React Router
+* Axios / Fetch API
 
-### Database
+### UI
 
-* PostgreSQL / MySQL
-* Relational schema for:
+* Tailwind CSS / CSS Modules
+* Responsive layout system
+* Component-based architecture
 
-  * Services
-  * Pages & Sections
-  * Portfolio
-  * Admins
-  * Inquiries
-  * Media
-  * Analytics
+### State Management
 
-### AI & Vector Processing
+* Context API / Redux (if used)
 
-* PDF parsing library
-* Embedding model
-* Vector database
+### Authentication
 
-### Security
-
-* OAuth 2.0
-* JWT authentication
-* Role-based access control
-* Input validation & sanitization
-
----
-
-# Installation
-
-```bash
-git clone <backend-repo-url>
-cd backend
-```
-
-If Node.js:
-
-```bash
-npm install
-npm run dev
-```
-
-If Spring Boot:
-
-```bash
-mvn clean install
-mvn spring-boot:run
-```
-
----
-
-# Environment Variables
-
-Create a `.env` file:
-
-```
-DATABASE_URL=
-JWT_SECRET=
-OAUTH_CLIENT_ID=
-OAUTH_CLIENT_SECRET=
-AI_API_KEY=
-VECTOR_DB_URL=
-```
-
----
-
-# Database Responsibilities
-
-The backend maintains:
-
-* Relational integrity
-* Cascade deletion rules
-* Foreign key constraints
-* Optimized indexing for analytics & search
+* OAuth 2.0 integration
+* Token-based session handling
+* Or make a **shorter version suitable for university submission**
+* Or format it specifically for GitHub best practices (badges, architecture diagram section, etc.)
