@@ -32,9 +32,9 @@ Frontend is handled separately.
 
 * Provide public APIs for:
 
-    * Services listing & details
-    * Portfolio listing & details
-    * Website page content & sections
+  * Services listing & details
+  * Portfolio listing & details
+  * Website page content & sections
 * Track page views
 * Track portfolio item views
 
