@@ -1,5 +1,6 @@
 package com.SE.ITHub.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -13,13 +14,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Value("${app.frontend.url}")
+    private String frontendUrl;
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // all endpoints
-                        .allowedOrigins("http://localhost:5173") // frontend
+                        .allowedOrigins(frontendUrl) // frontend
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -30,14 +35,25 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Disable CSRF to allow POST requests
-                .cors(Customizer.withDefaults()) // Use your WebMvcConfigurer CORS settings
+                .csrf(csrf -> csrf.disable())
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // This makes all endpoints unauthenticated
+                        .requestMatchers("/user", "/profile").authenticated()
+                        .anyRequest().permitAll()
                 )
-                .oauth2Login(Customizer.withDefaults()); // Keeps OAuth2 available if needed
+                // THIS IS THE FIX:
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            // This redirects the user to the oauth2 login page automatically
+                            response.sendRedirect("/oauth2/authorization/google");
+                        })
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl(frontendUrl + "/dashboard", true)
+                );
 
         return http.build();
     }
+
 
 }

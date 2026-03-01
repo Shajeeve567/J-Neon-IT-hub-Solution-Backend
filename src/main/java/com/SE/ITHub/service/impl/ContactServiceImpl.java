@@ -10,12 +10,14 @@ import com.SE.ITHub.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ContactServiceImpl implements ContactService {
     @Autowired
     private ContactRepository contactRepository;
 
-    public Contact findById(Long id){
+    public Contact findById(UUID id){
         return contactRepository.findById(id).orElseThrow(()->new ContactNotFoundException("Contact not found "+id));
     }
 
