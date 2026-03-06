@@ -25,7 +25,7 @@ public class PortfolioItem {
 
     @ManyToOne
     @JoinColumn(name = "service_id")
-    private Service service;
+    private Services service;
     private LocalDate projectDate;
     private String projectUrl;
     private Boolean isPublished;
