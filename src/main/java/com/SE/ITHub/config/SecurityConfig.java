@@ -15,8 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Value("${app.frontend.url}")
-    private String frontendUrl;
+    private String frontendUrl = "http://localhost:5173";
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
