@@ -3,6 +3,7 @@ package com.SE.ITHub.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,7 @@ public class PortfolioItem {
     @ManyToOne
     @JoinColumn(name = "service_id")
     private Service service;
-    private Date projectDate;
+    private LocalDate projectDate;
     private String projectUrl;
     private Boolean isPublished;
     private Integer sortOrder;
