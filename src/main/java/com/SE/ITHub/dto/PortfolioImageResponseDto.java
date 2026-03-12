@@ -3,6 +3,7 @@ package com.SE.ITHub.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -15,4 +16,5 @@ public class PortfolioImageResponseDto {
     private Boolean isCover;
     private Integer sortOrder;
     private String altTextOverride;
+    private LocalDateTime createdAt;
 }
