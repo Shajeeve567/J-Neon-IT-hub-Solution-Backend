@@ -33,8 +33,7 @@ public class PortfolioItem {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // PortfolioItem.java
-//    @OneToMany(mappedBy = "portfolioItem", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @OrderBy("sortOrder ASC")
-//    private List<PortfolioMedia> images = new ArrayList<>();
+    @OneToMany(mappedBy = "portfolioItem", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("sortOrder ASC")
+    private List<PortfolioImage> images = new ArrayList<>();
 }
