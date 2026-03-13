@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/admin")
@@ -35,8 +36,9 @@ public class AdminController {
         return "Name: " + name + ", Email: " + email;
     }
 
-    @PostMapping("/create")
-    public User createAdmin(@RequestBody CreateAdminRequest request) {
-        return adminService.createAdmin(request);
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@PathVariable UUID id) {
+        adminService.deleteUser(id);
+        return "User deleted successfully";
     }
 }
