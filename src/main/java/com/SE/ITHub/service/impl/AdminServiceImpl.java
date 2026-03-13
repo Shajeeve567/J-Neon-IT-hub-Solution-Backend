@@ -31,4 +31,8 @@ public class AdminServiceImpl implements AdminService {
         return userRepository.save(user);
     }
 
+    public void deleteUser(UUID id) {
+        userRepository.deleteById(id);
+    }
+
 }

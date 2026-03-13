@@ -9,4 +9,5 @@ import java.util.UUID;
 @Service
 public interface AdminService {
     User createAdmin(CreateAdminRequest request);
+    void deleteUser(UUID id);
 }
