@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,12 +18,9 @@ public class AdminController {
     @Autowired
     private AdminServiceImpl adminService;
 
-    @GetMapping("/user")
-    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
-        if (principal == null) {
-            return Map.of("error", "User not authenticated");
-        }
-        return principal.getAttributes();
+    @GetMapping("/users")
+    public List<User> user(@AuthenticationPrincipal OAuth2User principal) {
+        return adminService.getAllUsers();
     }
 
     @GetMapping("/profile")
@@ -39,4 +37,5 @@ public class AdminController {
     public User createAdmin(@RequestBody CreateAdminRequest request) {
         return adminService.createAdmin(request);
     }
+
 }
