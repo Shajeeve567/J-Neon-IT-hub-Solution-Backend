@@ -30,5 +30,10 @@ public class ServicesController {
         return ResponseEntity.status(HttpStatus.OK).body(servicesService.updateService(id, updateDto));
     }
 
+    @PostMapping("/add")
+    public ResponseEntity<ServiceResponseDto> createService(@RequestBody ServiceRequestDto reqDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(servicesService.createService(reqDto));
+    }
+
 
 }

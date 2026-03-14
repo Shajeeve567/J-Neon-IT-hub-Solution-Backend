@@ -37,4 +37,16 @@ public class ServicesServiceImpl {
         Services saved = serviceRepository.save(servicesMapper.updateEntity(service, updateDto));
         return servicesMapper.toResponse(saved);
     }
+    public ServiceResponseDto createService(ServiceRequestDto reqDto) {
+
+        Services service = servicesMapper.toEntity(reqDto);
+
+        serviceRepository.save(service);
+
+        return servicesMapper.toResponse(service);
+
+    }
+
+
+
 }
