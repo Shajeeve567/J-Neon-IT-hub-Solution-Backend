@@ -56,7 +56,7 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo ->
                                 userInfo.userService(customOAuth2UserService)
                         )
-                        .defaultSuccessUrl(frontendUrl + "/dashboard", true)
+                        .defaultSuccessUrl(frontendUrl + "/admin/portfolio", true)
                         .failureUrl(frontendUrl + "/login?error=true")
                 );
 
