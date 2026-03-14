@@ -28,8 +28,16 @@ public class ServicesServiceImpl {
 
         serviceRepository.delete(service);
     }
+    public List<ServiceResponseDto> getAllServices(){
+        List<Services> services = serviceRepository.findAll();
+        List<ServiceResponseDto> responses = new ArrayList<>();
 
+        for(Services service : services){
+            responses.add(servicesMapper.toResponse(service));
+        }
 
+        return responses;
+    }
 
     public ServiceResponseDto updateService(UUID id, ServiceUpdateDto updateDto){
         Services service = serviceRepository.findById(id)
