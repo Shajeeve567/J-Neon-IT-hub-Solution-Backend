@@ -25,5 +25,10 @@ public class ServicesController {
         servicesService.deleteService(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<ServiceResponseDto> updateService(@RequestBody ServiceUpdateDto updateDto, @PathVariable UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(servicesService.updateService(id, updateDto));
+    }
+
 
 }

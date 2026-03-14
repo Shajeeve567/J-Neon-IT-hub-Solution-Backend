@@ -20,9 +20,8 @@ import java.util.UUID;
 public class ServicesServiceImpl {
 
     private final ServiceRepository serviceRepository;
-
     private final ServicesMapper servicesMapper;
-    
+
     public void deleteService(UUID id){
         Services service = serviceRepository.findById(id)
                 .orElseThrow(() -> new ServiceNotFoundException(id));
@@ -31,4 +30,11 @@ public class ServicesServiceImpl {
     }
 
 
+
+    public ServiceResponseDto updateService(UUID id, ServiceUpdateDto updateDto){
+        Services service = serviceRepository.findById(id)
+                .orElseThrow(() -> new ServiceNotFoundException(id));
+        Services saved = serviceRepository.save(servicesMapper.updateEntity(service, updateDto));
+        return servicesMapper.toResponse(saved);
+    }
 }

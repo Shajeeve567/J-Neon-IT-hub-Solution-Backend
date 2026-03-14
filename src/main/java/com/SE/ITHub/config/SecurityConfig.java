@@ -28,8 +28,8 @@ public class SecurityConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins(frontendUrl)
+                registry.addMapping("/**") // all endpoints
+                        .allowedOrigins(frontendUrl) // frontend
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -39,7 +39,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
@@ -47,8 +46,10 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").authenticated()
                         .anyRequest().permitAll()
                 )
+                // THIS IS THE FIX:
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint((request, response, authException) -> {
+                            // This redirects the user to the oauth2 login page automatically
                             response.sendRedirect("/oauth2/authorization/google");
                         })
                 )
@@ -62,4 +63,6 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+
 }
