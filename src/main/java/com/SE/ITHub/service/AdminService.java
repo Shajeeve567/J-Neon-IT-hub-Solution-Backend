@@ -9,5 +9,6 @@ import java.util.List;
 @Service
 public interface AdminService {
     User createAdmin(CreateAdminRequest request);
+    void deleteUser(UUID id);
     List<User> getAllUsers();
 }
