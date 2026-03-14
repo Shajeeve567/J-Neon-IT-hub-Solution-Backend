@@ -7,6 +7,7 @@ import com.SE.ITHub.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -35,4 +36,8 @@ public class AdminServiceImpl implements AdminService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 }
