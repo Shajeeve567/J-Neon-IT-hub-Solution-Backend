@@ -1,5 +1,7 @@
 package com.SE.ITHub.config;
 
+import com.SE.ITHub.security.CustomOAuth2UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +19,9 @@ public class SecurityConfig {
 
     @Value("${app.frontend.url}")
     private String frontendUrl;
+    
+    @Autowired
+    private CustomOAuth2UserService customOAuth2UserService; // ADD THIS
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -38,7 +43,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user", "/profile").authenticated()
+                        .requestMatchers("/admin/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 // THIS IS THE FIX:
@@ -49,7 +54,11 @@ public class SecurityConfig {
                         })
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .defaultSuccessUrl(frontendUrl + "/dashboard", true)
+                        .userInfoEndpoint(userInfo ->
+                                userInfo.userService(customOAuth2UserService)
+                        )
+                        .defaultSuccessUrl(frontendUrl + "/admin/portfolio", true)
+                        .failureUrl(frontendUrl + "/login?error=true")
                 );
 
         return http.build();
