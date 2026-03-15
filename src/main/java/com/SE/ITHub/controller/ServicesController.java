@@ -35,5 +35,13 @@ public class ServicesController {
         return ResponseEntity.status(HttpStatus.CREATED).body(servicesService.createService(reqDto));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<ServiceResponseDto>> getAllServices(){
+        return ResponseEntity.status(HttpStatus.OK).body(servicesService.getAllServices());
+    }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ServiceResponseDto> getServiceById(@PathVariable UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(servicesService.getServiceById(id));
+    }
 }
