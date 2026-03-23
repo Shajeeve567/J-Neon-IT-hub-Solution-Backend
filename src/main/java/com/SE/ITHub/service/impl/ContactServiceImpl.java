@@ -22,5 +22,12 @@ public class ContactServiceImpl implements ContactService {
         return contactRepository.findById(id).orElseThrow(()->new ContactNotFoundException("Contact not found "+id));
     }
 
-
+    @Override
+    public List<Contact> findAll() {
+        List<Contact> contacts = contactRepository.findAll();
+        if(contacts.isEmpty()){
+            throw new ContactNotFoundException("Contact not found");
+        }
+        return contacts;
+    }
 }

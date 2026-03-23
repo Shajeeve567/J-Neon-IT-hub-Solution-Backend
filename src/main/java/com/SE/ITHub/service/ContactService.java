@@ -11,4 +11,5 @@ import java.util.UUID;
 @Service
 public interface ContactService {
     Contact findById(UUID id);
+    List<Contact> findAll();
 }

@@ -21,4 +21,8 @@ public class ContactController {
         return ResponseEntity.status(HttpStatus.OK).body(contactService.findById(id));
     }
 
+    @GetMapping("/get-all")
+    public ResponseEntity<?> getAllContacts(){
+        return ResponseEntity.status(HttpStatus.OK).body(contactService.findAll());
+    }
 }
