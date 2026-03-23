@@ -15,7 +15,11 @@ import java.util.UUID;
 public interface ContactService {
     Contact findById(UUID id);
 <<<<<<< HEAD
+<<<<<<< HEAD
     ContactResponse addContactMessage(ContactCreateRequest contact);
 =======
 >>>>>>> 793ed9b (feat(contact): getting contact by ID)
+=======
+    List<Contact> findAll();
+>>>>>>> e9bc41f (feat(contact): getting all contacts)
 }
