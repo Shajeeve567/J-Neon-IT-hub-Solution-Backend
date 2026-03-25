@@ -24,4 +24,11 @@ public class ContactServiceImpl implements ContactService {
     public ContactResponse addContactMessage(ContactCreateRequest contact){
         return  ContactMapper.toResponse(contactRepository.save(ContactMapper.toEntity(contact)));
     }
+
+    public String deleteContact(UUID id){
+        Contact contact=findById(id);
+
+        contactRepository.delete(contact);
+        return "Contact deleted";
+    }
 }
