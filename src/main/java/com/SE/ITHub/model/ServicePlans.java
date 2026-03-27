@@ -60,13 +60,13 @@ public class ServicePlans {
     private String features;
 
     @Column(name = "is_featured", nullable = false)
-    private boolean isFeatured;
+    private Boolean isFeatured;
 
     @Column(name = "sort_order", nullable = false)
     private int sortOrder;
 
-    @Column(name = "is_active", nullable = false)
-    private boolean isActive;
+    @Column(name = "is_active")
+    private Boolean isActive;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -85,4 +85,19 @@ public class ServicePlans {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public void setFeatured(boolean featured) {
+        this.isFeatured = featured;
+    }
+
+    public void setActive(boolean active) {
+        this.isActive = active;
+    }
+
+    public Boolean getFeatured() {
+        return this.isFeatured;
+    }
+
+    public Boolean getActive() {
+        return this.isActive;
+    }
 }

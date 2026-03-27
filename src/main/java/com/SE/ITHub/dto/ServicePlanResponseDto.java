@@ -15,7 +15,7 @@ public class ServicePlanResponseDto {
     private String priceType;
     private String description;
     private String features;
-    private boolean isFeatured;
-    private boolean isActive;
+    private Boolean isFeatured;
+    private Boolean isActive;
 
 }
