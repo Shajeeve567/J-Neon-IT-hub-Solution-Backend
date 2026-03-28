@@ -1,7 +1,7 @@
 package com.SE.ITHub.mapper;
 
 
-import com.SE.ITHub.dto.ServicePlansDto.PlansUpdateReqDto;
+import com.SE.ITHub.dto.PlansUpdateReqDto;
 import com.SE.ITHub.dto.ServicePlanReqDto;
 import com.SE.ITHub.dto.ServicePlanResponseDto;
 import com.SE.ITHub.exception.PlanNotFoundException;
@@ -54,6 +54,7 @@ public class ServicePlanMapper {
         }
 
         return ServicePlanResponseDto.builder()
+                .id(servicePlan.getId())
                 .serviceType(servicePlan.getService().getTitle())
                 .planName(servicePlan.getPlanName())
                 .price(servicePlan.getPrice())
