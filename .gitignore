@@ -31,5 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 .env
 application.properties
+=======
+
+application.properties
+>>>>>>> 793ed9b (feat(contact): getting contact by ID)

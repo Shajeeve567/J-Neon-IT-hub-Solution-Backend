@@ -10,6 +10,10 @@ import com.SE.ITHub.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+>>>>>>> 793ed9b (feat(contact): getting contact by ID)
 import java.util.UUID;
 
 @Service
@@ -21,7 +25,22 @@ public class ContactServiceImpl implements ContactService {
         return contactRepository.findById(id).orElseThrow(()->new ContactNotFoundException("Contact not found "+id));
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
     public ContactResponse addContactMessage(ContactCreateRequest contact){
         return  ContactMapper.toResponse(contactRepository.save(ContactMapper.toEntity(contact)));
     }
+=======
+
+>>>>>>> 793ed9b (feat(contact): getting contact by ID)
+=======
+    @Override
+    public List<Contact> findAll() {
+        List<Contact> contacts = contactRepository.findAll();
+        if(contacts.isEmpty()){
+            throw new ContactNotFoundException("Contact not found");
+        }
+        return contacts;
+    }
+>>>>>>> e9bc41f (feat(contact): getting all contacts)
 }
