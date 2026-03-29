@@ -65,8 +65,8 @@ public class ServicePlans {
     @Column(name = "sort_order", nullable = false)
     private int sortOrder;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

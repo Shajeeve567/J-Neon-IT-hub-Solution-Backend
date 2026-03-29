@@ -17,6 +17,9 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
+    @PutMapping("/tags")
+    public ResponseEntity<?> editContact(@RequestBody ContactTagRequest contact){
+        return ResponseEntity.status(HttpStatus.OK).body(contactService.updateContactMessage(contact));
     @PostMapping("/post")
     public ResponseEntity<?> postContact(@RequestBody ContactCreateRequest contact){
         return ResponseEntity.status(HttpStatus.OK).body(contactService.addContactMessage(contact));
