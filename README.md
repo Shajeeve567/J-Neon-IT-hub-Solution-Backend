@@ -147,13 +147,13 @@ Frontend is handled separately.
 * PostgreSQL / MySQL
 * Relational schema for:
 
-  * Services
-  * Pages & Sections
-  * Portfolio
-  * Admins
-  * Inquiries
-  * Media
-  * Analytics
+    * Services
+    * Pages & Sections
+    * Portfolio
+    * Admins
+    * Inquiries
+    * Media
+    * Analytics
 
 ### AI & Vector Processing
 

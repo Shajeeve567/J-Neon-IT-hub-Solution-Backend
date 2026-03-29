@@ -35,8 +35,8 @@ public class ServicesMapper {
                 .slug(service.getSlug())
                 .shortDescription(service.getShortDescription())
                 .icon(service.getIcon())
-                .sortOrder(service.getSortOrder())
                 .isActive(service.isActive())
+                .sortOrder(service.getSortOrder())
                 .build();
     }
 

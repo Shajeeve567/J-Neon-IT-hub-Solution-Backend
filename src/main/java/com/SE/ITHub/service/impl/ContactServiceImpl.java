@@ -10,6 +10,7 @@ import com.SE.ITHub.repository.ContactRepository;
 import com.SE.ITHub.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import java.util.UUID;
 
@@ -22,10 +23,30 @@ public class ContactServiceImpl implements ContactService {
         return contactRepository.findById(id).orElseThrow(()->new ContactNotFoundException("Contact not found "+id));
     }
 
+    public ContactResponse addContactMessage(ContactCreateRequest contact){
+        return  ContactMapper.toResponse(contactRepository.save(ContactMapper.toEntity(contact)));
+    }
+
+    @Override
+    public List<Contact> findAll() {
+        List<Contact> contacts = contactRepository.findAll();
+        if(contacts.isEmpty()){
+            throw new ContactNotFoundException("Contact not found");
+        }
+        return contacts;
+    }
+
     public ContactResponse updateContactMessage(ContactTagRequest contactRequest) {
         Contact existingContact =findById(contactRequest.getId());
         existingContact.setStatus(contactRequest.getStatus());
         Contact updatedContact = contactRepository.save(existingContact);
         return ContactMapper.toResponse(updatedContact);
+    }
+
+    public String deleteContact(UUID id){
+        Contact contact=findById(id);
+
+        contactRepository.delete(contact);
+        return "Contact deleted";
     }
 }

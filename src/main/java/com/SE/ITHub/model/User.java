@@ -1,6 +1,5 @@
 package com.SE.ITHub.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,39 +8,36 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(
-        name = "services",
-        indexes = {
-                @Index(name = "idx_active_sort", columnList = "is_active, sort_order")
-        }
-)
-public class Service {
-
+@Data
+@Table(name="users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     @Column(length = 120, nullable = false)
-    private String title;
+    private String name;
 
-    @Column(length = 140, nullable = false, unique = true)
-    private String slug;
+    @Column(length = 190, nullable = false, unique = true)
+    private String email;
 
-    @Column(name = "short_description", length = 255)
-    private String shortDescription;
+    @Column(name = "oauth_provider", length = 50, nullable = false)
+    private String oauthProvider;
 
-    @Column(length = 120)
-    private String icon;
+    @Column(name = "oauth_provider_id", length = 190, nullable = false)
+    private String oauthProviderId;
 
-    @Column(name = "is_active")
-    private Boolean isActive = true;
+    @Column(length = 30)
+    private String role = "editor";
 
-    @Column(name = "sort_order")
-    private Integer sortOrder = 0;
+    @Column(length = 20)
+    private String status = "active";
+
+    @Column(name = "last_login_at")
+    private LocalDateTime lastLoginAt;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -49,8 +45,7 @@ public class Service {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    /* ---------- Lifecycle Hooks ---------- */
-
+    /* Automatically set timestamps */
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -61,4 +56,5 @@ public class Service {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
+
 }

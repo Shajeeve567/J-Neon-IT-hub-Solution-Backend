@@ -7,6 +7,7 @@ import com.SE.ITHub.model.Contact;
 import com.SE.ITHub.service.ContactService;
 import com.SE.ITHub.service.impl.ContactServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.SE.ITHub.model.Contact;
 
 public class ContactMapper {
 
