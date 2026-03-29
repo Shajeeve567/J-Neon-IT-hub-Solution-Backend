@@ -22,8 +22,8 @@ public class PortfolioMedia {
     @JoinColumn(name = "portfolio_item_id")
     private PortfolioItem portfolioItem;
 
-    private Integer sortOrder;
-    private String altTextOverride;
-    private LocalDateTime createdAt;
+//    private Integer sortOrder;
+//    private String altTextOverride;
+//    private LocalDateTime createdAt;
 
 }

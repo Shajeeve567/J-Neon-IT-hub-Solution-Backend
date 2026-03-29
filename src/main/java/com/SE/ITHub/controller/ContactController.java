@@ -22,6 +22,7 @@ public class ContactController {
     @PutMapping("/tags")
     public ResponseEntity<?> editContact(@RequestBody ContactTagRequest contact){
         return ResponseEntity.status(HttpStatus.OK).body(contactService.updateContactMessage(contact));
+    }
     @PostMapping("/post")
     public ResponseEntity<?> postContact(@RequestBody ContactCreateRequest contact){
         return ResponseEntity.status(HttpStatus.OK).body(contactService.addContactMessage(contact));
@@ -37,10 +38,6 @@ public class ContactController {
         return ResponseEntity.status(HttpStatus.OK).body(contactService.findAll());
     }
 
-
-    @PutMapping("/tags")
-    public ResponseEntity<?> editContact(@RequestBody ContactTagRequest contact){
-        return ResponseEntity.status(HttpStatus.OK).body(contactService.updateContactMessage(contact));
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteAllContact(@PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(contactService.deleteContact(id));

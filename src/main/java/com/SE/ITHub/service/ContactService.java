@@ -15,4 +15,5 @@ public interface ContactService {
     ContactResponse addContactMessage(ContactCreateRequest contact);
     List<Contact> findAll();
     String deleteContact(UUID id);
+    ContactResponse updateContactMessage(ContactTagRequest contactRequest);
 }
