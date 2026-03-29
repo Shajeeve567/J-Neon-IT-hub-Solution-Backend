@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/contact")
 public class ContactController {
@@ -34,6 +36,7 @@ public class ContactController {
     public ResponseEntity<?> getAllContacts(){
         return ResponseEntity.status(HttpStatus.OK).body(contactService.findAll());
     }
+
 
     @PutMapping("/tags")
     public ResponseEntity<?> editContact(@RequestBody ContactTagRequest contact){
