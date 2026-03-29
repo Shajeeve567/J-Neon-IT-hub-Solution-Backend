@@ -11,4 +11,5 @@ import java.util.UUID;
 public interface ContactService {
     Contact findById(UUID id);
     ContactResponse addContactMessage(ContactCreateRequest contact);
+    String deleteContact(UUID id);
 }
