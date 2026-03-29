@@ -43,4 +43,10 @@ public class ContactServiceImpl implements ContactService {
         return ContactMapper.toResponse(updatedContact);
     }
 
+    public String deleteContact(UUID id){
+        Contact contact=findById(id);
+
+        contactRepository.delete(contact);
+        return "Contact deleted";
+    }
 }
