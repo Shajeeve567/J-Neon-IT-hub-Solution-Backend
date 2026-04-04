@@ -4,6 +4,8 @@ import os
 import uuid
 import shutil
 from db_utils import insert_document_record, get_all_documents
+from models import DocumentInfo
+from typing import List
 import logging
 
 
@@ -19,7 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/documents")
+@app.get("/documents", response_model=List[DocumentInfo])
 def fetch_documents():
     documents = get_all_documents()
     return documents
