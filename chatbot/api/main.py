@@ -7,7 +7,7 @@ from db_utils import insert_document_record, get_all_documents
 from models import DocumentInfo
 from typing import List
 import logging
-
+from chroma_utils import index_document_to_chroma
 
 logging.basicConfig(filename='app.log', level=logging.INFO)
 
@@ -43,7 +43,11 @@ def upload_document(file: UploadFile = File(...)):
             shutil.copyfileobj(file.file, buffer)
 
         file_id = insert_document_record(file.filename)
-        print(f"Successfully saved file {file_id}")
+        success = index_document_to_chroma(temp_file_path, file_id)
+        
+        if success:
+            return {"message": f"File {file.filename} has been successfully uploaded and indexed.", "file_id": file_id}
+
         
     finally:
         if os.path.exists(temp_file_path):
