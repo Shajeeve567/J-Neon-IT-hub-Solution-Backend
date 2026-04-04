@@ -54,6 +54,13 @@ def get_all_documents():
     conn.close()
     return [dict(doc) for doc in documents]
 
+def delete_document_record(file_id):
+    conn = get_db_connection()
+    conn.execute('DELETE FROM document_store WHERE id = ?', (file_id,))
+    conn.commit()
+    conn.close()
+    return True
+    
 
 # Initialize the database tables
 create_application_logs()
