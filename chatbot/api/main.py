@@ -3,11 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 import uuid
 import shutil
-from db_utils import insert_document_record, get_all_documents
-from models import DocumentInfo
+from db_utils import insert_document_record, get_all_documents, delete_document_record
+from models import DocumentInfo, DeleteFileRequest
 from typing import List
 import logging
-from chroma_utils import index_document_to_chroma
+from chroma_utils import index_document_to_chroma, delete_doc_from_chroma
 
 logging.basicConfig(filename='app.log', level=logging.INFO)
 
@@ -52,3 +52,19 @@ def upload_document(file: UploadFile = File(...)):
     finally:
         if os.path.exists(temp_file_path):
             os.remove(temp_file_path)
+
+
+@app.post("/delete-doc")
+def delete_document(request: DeleteFileRequest):
+    # Delete from Chroma
+    chroma_delete_success = delete_doc_from_chroma(request.file_id)
+
+    if chroma_delete_success:
+        # If successfully deleted from Chroma, delete from our database
+        db_delete_success = delete_document_record(request.file_id)
+        if db_delete_success:
+            return {"message": f"Successfully deleted document with file_id {request.file_id} from the system."}
+        else:
+            return {"error": f"Deleted from Chroma but failed to delete document with file_id {request.file_id} from the database."}
+    else:
+        return {"error": f"Failed to delete document with file_id {request.file_id} from Chroma."}
