@@ -34,3 +34,7 @@ build/
 .env
 application.properties
 src/main/resources/application.properties
+
+chatbot/api/rag_app.db
+chatbot/api/app.log
+chatbot/.venv

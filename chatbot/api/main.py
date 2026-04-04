@@ -2,7 +2,11 @@ from fastapi import FastAPI, UploadFile, HTTPException, File
 import os
 import uuid
 import shutil
+from db_utils import insert_document_record
+import logging
 
+
+logging.basicConfig(filename='app.log', level=logging.INFO)
 
 app = FastAPI()
 
@@ -21,6 +25,9 @@ def upload_document(file: UploadFile = File(...)):
         # Save the uploaded file to a temporary file
         with open(temp_file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
+
+        file_id = insert_document_record(file.filename)
+        print(f"Successfully saved file {file_id}")
         
     finally:
         if os.path.exists(temp_file_path):
