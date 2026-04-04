@@ -1,14 +1,28 @@
 from fastapi import FastAPI, UploadFile, HTTPException, File
+from fastapi.middleware.cors import CORSMiddleware
 import os
 import uuid
 import shutil
-from db_utils import insert_document_record
+from db_utils import insert_document_record, get_all_documents
 import logging
 
 
 logging.basicConfig(filename='app.log', level=logging.INFO)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # In production, replace with specific origins
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/documents")
+def fetch_documents():
+    documents = get_all_documents()
+    return documents
 
 @app.post("/upload-doc")
 def upload_document(file: UploadFile = File(...)):
