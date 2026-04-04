@@ -32,3 +32,16 @@ def index_document_to_chroma(file_path: str, file_id: int) -> bool:
     except Exception as e:
         print(f"Error indexing document: {e}")
         return False
+    
+def delete_doc_from_chroma(file_id: int):
+    try:
+        docs = vectorstore.get(where={"file_id": file_id})
+        print(f"Found {len(docs['ids'])} document chunks for file_id {file_id}")
+        
+        vectorstore._collection.delete(where={"file_id": file_id})
+        print(f"Deleted all documents with file_id {file_id}")
+        
+        return True
+    except Exception as e:
+        print(f"Error deleting document with file_id {file_id} from Chroma: {str(e)}")
+        return False
