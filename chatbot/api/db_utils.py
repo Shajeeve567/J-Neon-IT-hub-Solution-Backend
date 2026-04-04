@@ -9,3 +9,32 @@ def get_db_connection():
     return conn
 
 
+def create_document_store():
+    conn = get_db_connection()
+    conn.execute('''CREATE TABLE IF NOT EXISTS document_store
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                     filename TEXT,
+                     upload_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
+    conn.close()
+
+def insert_document_record(filename):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO document_store (filename) VALUES (?)', (filename,))
+    file_id = cursor.lastrowid
+    conn.commit()
+    conn.close()
+    return file_id
+
+def get_all_documents():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT id, filename, upload_timestamp FROM document_store ORDER BY upload_timestamp DESC')
+    documents = cursor.fetchall()
+    conn.close()
+    return [dict(doc) for doc in documents]
+
+
+# Initialize the database tables
+create_application_logs()
+create_document_store()
